@@ -1,0 +1,13 @@
+Basic syntax--
+ES6+Features--
+Arrow functions
+Template literals
+Array methods
+Object property shorthand
+Destructuring
+Rest operator
+Spread operator
+Promises
+Async/Await syntax
+Event handling 
+Import and export syntax -- more likely a separate file
