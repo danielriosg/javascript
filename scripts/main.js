@@ -13,8 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function addTask(taskText, taskListElement) {
-    const taskItem = document.createElement("li");
-    taskItem.textContent = taskText;
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task-item");
+
+    const taskTextSpan = document.createElement("span");
+    taskTextSpan.textContent = taskText;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      taskItem.remove();
+    });
+
+    taskItem.appendChild(taskTextSpan);
+    taskItem.appendChild(deleteButton);
+
     taskListElement.appendChild(taskItem);
   }
 });
