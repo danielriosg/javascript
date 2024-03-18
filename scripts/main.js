@@ -3,10 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("taskInput");
   const taskList = document.getElementById("taskList");
 
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach((taskText) => {
+    addTask(taskText, taskList);
+  });
+
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const taskText = taskInput.value.trim();
     if (taskText !== "") {
+      tasks.push(taskText);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
       addTask(taskText, taskList);
       taskInput.value = "";
     }
@@ -22,6 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
+      const index = tasks.indexOf(taskText);
+      if (index !== -1) {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
       taskItem.remove();
     });
 
