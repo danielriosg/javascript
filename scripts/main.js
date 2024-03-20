@@ -27,6 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskTextSpan = document.createElement("span");
     taskTextSpan.textContent = taskText;
 
+    const prioritySelect = document.createElement("select");
+    prioritySelect.classList.add("priority-select");
+
+    const lowOption = document.createElement("option");
+    lowOption.value = "low";
+    lowOption.textContent = "Low";
+
+    const mediumOption = document.createElement("option");
+    mediumOption.value = "medium";
+    mediumOption.textContent = "Medium";
+
+    const highOption = document.createElement("option");
+    highOption.value = "high";
+    highOption.textContent = "High";
+
+    prioritySelect.appendChild(lowOption);
+    prioritySelect.appendChild(mediumOption);
+    prioritySelect.appendChild(highOption);
+
+    prioritySelect.addEventListener("change", (e) => {
+      taskItem.classList.remove("low", "medium", "high");
+      taskItem.classList.add(e.target.value);
+    });
+
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
@@ -38,9 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
       taskItem.remove();
     });
 
+    taskItem.appendChild(prioritySelect);
     taskItem.appendChild(taskTextSpan);
     taskItem.appendChild(deleteButton);
 
     taskListElement.appendChild(taskItem);
+
+    taskItem.classList.add(prioritySelect.value);
   }
 });
