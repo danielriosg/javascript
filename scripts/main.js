@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     prioritySelect.addEventListener("change", (e) => {
       taskItem.classList.remove("low", "medium", "high");
       taskItem.classList.add(e.target.value);
+      localStorage.setItem(`task-${taskText}`, e.target.value);
     });
 
     const deleteButton = document.createElement("button");
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
       }
       taskItem.remove();
+      localStorage.removeItem(`task-${taskText}`); // Remove the stored priority when the task is deleted
     });
 
     taskItem.appendChild(prioritySelect);
@@ -68,6 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     taskListElement.appendChild(taskItem);
 
-    taskItem.classList.add(prioritySelect.value);
+    const storedPriority = localStorage.getItem(`task-${taskText}`);
+    if (storedPriority) {
+      prioritySelect.value = storedPriority;
+      taskItem.classList.add(storedPriority);
+    } else {
+      taskItem.classList.add(prioritySelect.value);
+    }
   }
 });
