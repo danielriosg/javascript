@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     prioritySelect.addEventListener("change", (e) => {
       taskItem.classList.remove("low", "medium", "high");
       taskItem.classList.add(e.target.value);
+      taskItem.dataset.priority = e.target.value; // Set the dataset attribute
       localStorage.setItem(`task-${taskText}`, e.target.value);
     });
 
@@ -74,8 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storedPriority) {
       prioritySelect.value = storedPriority;
       taskItem.classList.add(storedPriority);
+      taskItem.dataset.priority = storedPriority; // Ensure dataset priority is set
     } else {
       taskItem.classList.add(prioritySelect.value);
+      taskItem.dataset.priority = prioritySelect.value; // Ensure dataset priority is set
     }
   }
 });
